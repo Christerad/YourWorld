@@ -346,7 +346,7 @@ return(
                                     <IonImg  src={AltarImg}/>
                                 </IonRow>
                                 <IonRow class='ion-justify-content-center'>
-                                    <IonButton onClick={SummonPlant} id="trigger-button-Gatcha">
+                                    <IonButton onClick={SummonPlant} >
                                         summon
                                     </IonButton>
                                     <IonButton onClick={ClaimFieldTicket}>
