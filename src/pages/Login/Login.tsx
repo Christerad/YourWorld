@@ -162,7 +162,7 @@ return (
                 <IonRow>
                     <IonItem>
                         <IonLabel class="to-register">
-                        Don't have an account? <a href="/register">Register Here</a>
+                        Don't have an account? <a href="Register">Register Here</a>
                         </IonLabel>
                     </IonItem>
                 </IonRow>
