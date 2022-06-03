@@ -1,13 +1,12 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonRow, IonCol
 , IonInput, IonItem, IonLabel, IonButton, IonCard, IonImg, IonAlert } from '@ionic/react';
 import { IonIcon } from '@ionic/react';
-import { personCircle, logoGoogle, logoFacebook } from "ionicons/icons";
+import { logoGoogle } from "ionicons/icons";
 import "./Login.css";
-import { useHistory,Redirect } from 'react-router';
+import { useHistory } from 'react-router';
 import { useState } from 'react';
-import { getAuth, signInWithPopup, GoogleAuthProvider,signInWithEmailAndPassword} from "firebase/auth"
+import { getAuth, signInWithPopup, GoogleAuthProvider,signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth"
 import { getDatabase, ref, child, get, set } from "firebase/database";
-import { exists } from 'fs';
 
 import MainIcon from '../../components/Image/Icon.png'
 
@@ -21,12 +20,6 @@ const Login: React.FC = () => {
     const [showAlert1, setShowAlert1] = useState(false);
 
     console.log('Opening Login')
-
-
-    async function InsertUserID(uid: string) {
-        
-    }
-
 
     async function LoginGoogle() {
         const provider = new GoogleAuthProvider();
@@ -99,7 +92,19 @@ const Login: React.FC = () => {
         (
             setShowAlert1(true)
         )
-}
+    }
+
+    const db = getDatabase();
+    //console.log('db :',db)
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+          //console.log('User :',user)
+
+          history.push('/Schedule');
+          
+        } 
+      });
 return (
 
 
@@ -112,15 +117,14 @@ return (
     <IonContent fullscreen>
         <IonRow>
             <IonCol class='ion-text-center'>
-                <IonImg
-                style={{ fontSize: "100px"}}
-                 src={MainIcon}>
+                <IonRow class='ion-justify-content-center'>
+                    <IonImg
+                        class='Main-Icon'
+                        src={MainIcon}>
 
-                 </IonImg>
-                {/* <IonIcon 
-                    style={{ fontSize: "100px", color: "#0040ff" }}
-                    icon={personCircle}
-                /> */}
+                        </IonImg>
+                </IonRow>
+
             </IonCol>
         </IonRow>
         <IonRow>

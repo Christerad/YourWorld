@@ -1,5 +1,5 @@
-import { IonContent, IonHeader, IonPage, IonRow, IonCol, IonImg, IonText, IonLabel,IonLoading, IonItemOption, IonRange
-    ,IonItem, IonList, IonItemSliding, IonItemOptions, IonChip, IonAlert, IonGrid, getPlatforms} from '@ionic/react';
+import {  IonRow, IonCol,  IonText, IonLoading, IonItemOption, 
+    IonItem, IonList, IonItemSliding, IonItemOptions, IonChip, IonAlert, IonGrid} from '@ionic/react';
 import { IonIcon } from '@ionic/react';
 import {calendar, add, bookSharp, schoolSharp ,documentsSharp , clipboard, checkmarkCircle,closeCircle, watchOutline} from "ionicons/icons";
 import React, { useState, useRef, useEffect } from 'react';

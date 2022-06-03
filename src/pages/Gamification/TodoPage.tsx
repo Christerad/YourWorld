@@ -1,10 +1,9 @@
-import { IonContent, IonHeader, IonPage, IonRow, IonCol, IonText, IonRange, IonButtons, IonAlert
-    , IonInput, IonItem, IonLabel,  IonFab, IonFabButton, IonModal, IonButton, IonDatetime, IonPopover, IonChip, isPlatform, IonToolbar} from '@ionic/react';
+import { IonContent, IonPage, IonRow, IonCol, IonText, IonRange, IonAlert
+    , IonInput, IonItem, IonLabel,  IonFab, IonFabButton, IonModal, IonButton, IonChip, isPlatform, IonToolbar} from '@ionic/react';
 import { IonIcon } from '@ionic/react';
-import {calendar, add, bookSharp, schoolSharp ,documentsSharp , clipboard, closeCircle} from "ionicons/icons";
-import React, { useState, useRef, useEffect } from 'react';
+import { add, bookSharp, schoolSharp ,documentsSharp , clipboard, closeCircle} from "ionicons/icons";
+import React, { useState} from 'react';
 
-import { format, parseISO } from 'date-fns';
 import { useHistory } from 'react-router';
 
 import { getDatabase, ref, onValue, set, push, child, update} from "firebase/database";

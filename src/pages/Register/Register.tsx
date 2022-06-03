@@ -1,21 +1,16 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonRow, IonCol
-    , IonInput, IonItem, IonLabel, IonButton, IonDatetime ,IonPopover, IonCard, IonAlert, IonImg } from '@ionic/react';
-import { IonIcon } from '@ionic/react';
-import { personCircle,calendar } from "ionicons/icons";
-import React, { useState, useRef } from 'react';
+    , IonInput, IonItem, IonLabel, IonButton, IonAlert, IonImg } from '@ionic/react';
+
+import React, { useState } from 'react';
 import { format, parseISO } from 'date-fns';
-import { getAuth, createUserWithEmailAndPassword, UserInfo , updateProfile} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword , updateProfile} from "firebase/auth";
 import { useHistory } from 'react-router';
-import { doc, setDoc} from "firebase/firestore"; 
-import { getDatabase, ref, onValue, set, push, child, update} from "firebase/database";
+import { getDatabase, ref, set, push, child, update} from "firebase/database";
 
 import MainIcon from '../../components/Image/Icon.png'
 const Register: React.FC = () => {
-    const [popoverDate2, setPopoverDate2] = useState('');
-    const [selectedDate, setSelectedDate] = useState('2012-12-15T13:47:20.789');
 
     const [name, setName] = useState('')
-    const [DOB, setDOB] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmpassword, confirmsetPassword] = useState('')
@@ -55,7 +50,7 @@ const Register: React.FC = () => {
             SetErrorMessage('Repeat Password Field Is Required.');
             return false
            }
-           else if (password != confirmpassword) {
+           else if (password !== confirmpassword) {
             SetErrorCode('Incorrect Confirmed Passwor');
             SetErrorMessage('Password Field Is not the same with ConfirmPassword.');
             return false

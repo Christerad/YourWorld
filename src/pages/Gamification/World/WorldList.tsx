@@ -214,18 +214,18 @@ const WorldList: React.FC<{UID :string}> = (props) => {
                     </IonRow>
 
                     {/* Rarity : {item.Rarity} */}
-                    {item.Rarity==1 && (
+                    {item.Rarity===1 && (
                         <IonRow class='ion-justify-content-center'>
                             <IonIcon src={star}></IonIcon>    
                         </IonRow>
                     )}
-                    {item.Rarity==2 && (
+                    {item.Rarity===2 && (
                         <IonRow class='ion-justify-content-center'>
                             <IonIcon src={star}/>
                             <IonIcon src={star}/>
                         </IonRow>
                     )}                   
-                    {item.Rarity==3 && (
+                    {item.Rarity===3 && (
                         <IonRow class='ion-justify-content-center'>
                             <IonIcon src={star}/>
                             <IonIcon src={star}/>
@@ -414,18 +414,18 @@ const WorldList: React.FC<{UID :string}> = (props) => {
                   <IonRow class='ion-justify-content-center'>
                         Plant Name :{PlantName}
                   </IonRow>
-                  {Rarity==1 && (
+                  {Rarity===1 && (
                         <IonRow class='ion-justify-content-center'>
                             <IonIcon src={star}></IonIcon>    
                         </IonRow>
                     )}
-                    {Rarity==2 && (
+                    {Rarity===2 && (
                         <IonRow class='ion-justify-content-center'>
                             <IonIcon src={star}/>
                             <IonIcon src={star}/>
                         </IonRow>
                     )}                   
-                    {Rarity==3 && (
+                    {Rarity===3 && (
                         <IonRow class='ion-justify-content-center'>
                             <IonIcon src={star}/>
                             <IonIcon src={star}/>
