@@ -1,5 +1,5 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonRow, IonCol ,IonImg, IonText
-    , IonInput, IonItem, IonLabel, IonLoading ,IonTabBar, IonTabButton, IonRouterOutlet, IonList, IonListHeader, IonAlert, IonGrid, IonButton, IonModal} from '@ionic/react';
+    , IonInput, IonItem, IonLabel, IonLoading ,IonTabBar, IonTabButton, IonRouterOutlet, IonList, IonListHeader, IonAlert, IonGrid, IonButton, IonModal, isPlatform} from '@ionic/react';
 import { IonIcon } from '@ionic/react';
 import { personCircle,calendar, documentText, podium, trophy, star } from "ionicons/icons";
 import React, { useState, useRef, useEffect } from 'react';
@@ -297,6 +297,13 @@ const Gatcha: React.FC= () => {
 
 return(
     <IonPage>
+            {isPlatform('desktop') && (
+                <IonToolbar>
+                    <IonRow class='ion-justify-content-center'>
+                        <IonText>Schedule</IonText>
+                    </IonRow>
+                </IonToolbar>
+            )}
         <IonContent>
             <IonGrid >
                 <IonRow  >
@@ -349,20 +356,6 @@ return(
                             </IonCol>
                         </IonItem>
                     </IonCol>
-                </IonRow>
-                <IonRow>
-                    <IonItem>
-                        <IonLabel class="to-register">
-                        Already have an account? <a href="/Login">Login Here</a>
-                        </IonLabel>
-                    </IonItem>
-                </IonRow>
-                <IonRow>
-                    <IonItem>
-                        <IonLabel class="to-register">
-                        Don't have an account? <a href="/Register">Login Here</a>
-                        </IonLabel>
-                    </IonItem>
                 </IonRow>
                 <IonRow>
                     <InventoryList UID={UID}/>

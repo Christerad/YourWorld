@@ -1,4 +1,4 @@
-import {  IonRow, IonCol ,IonImg,IonThumbnail} from '@ionic/react';
+import {  IonRow, IonCol ,IonImg,IonThumbnail, IonToolbar, IonText, isPlatform} from '@ionic/react';
 import React, { useState, useRef } from 'react';
 import "./ProfilePicture.css";
 import { useHistory } from 'react-router';
@@ -14,6 +14,7 @@ const ProfilePicture : React.FC< {PhotoUrl :string}> = (props) => {
 
     return (
     <IonRow>
+
       <IonCol className="ion-text-center">
        <IonThumbnail>
           <IonImg src={props.PhotoUrl}  onClick={()=>gettoprofile()} />

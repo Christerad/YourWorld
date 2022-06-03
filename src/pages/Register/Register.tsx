@@ -132,17 +132,15 @@ return (
         </IonToolbar>
     </IonHeader>
     <IonContent fullscreen>
-        <IonRow>
+        <IonRow >
             <IonCol class='ion-text-center'>
-                <IonImg
-                style={{ fontSize: "100px"}}
-                 src={MainIcon}>
+                <IonRow class='ion-justify-content-center'>
+                    <IonImg
+                        class='Main-Icon'
+                        src={MainIcon}>
 
-                 </IonImg>
-                {/* <IonIcon 
-                    style={{ fontSize: "100px", color: "#0040ff" }}
-                    icon={personCircle}
-                /> */}
+                        </IonImg>
+                </IonRow>
             </IonCol>
         </IonRow>
         <IonRow>
