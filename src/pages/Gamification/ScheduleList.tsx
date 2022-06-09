@@ -12,7 +12,7 @@ import { getPlatforms } from '@ionic/core';
 
 
 const ScheduleList: React.FC<{UID :string}> = (props) => {
-    console.log('TodoList,UID :',props.UID)
+    // console.log('TodoList,UID :',props.UID)
     const [data, setData] = useState<any[]>([])
 
     const formatDate = (value: string) => {
@@ -54,7 +54,7 @@ const ScheduleList: React.FC<{UID :string}> = (props) => {
 
       let CurrDate = startOfDay (new Date())
       SetCurrdate(format(CurrDate,'yyy-MM-dd'))
-      console.log('Curr Date :',format(CurrDate,'yyy-MM-dd'))
+      // console.log('Curr Date :',format(CurrDate,'yyy-MM-dd'))
       let StartWeekDate =startOfWeek(CurrDate)
       SetStartWeekdate(format(StartWeekDate,'yyy-MM-dd'))
       //console.log('StartOfWeek Date :',format(StartWeekDate,'dd-MM-yyy'))
@@ -269,8 +269,8 @@ const ScheduleList: React.FC<{UID :string}> = (props) => {
 
     const loadData =  () => { 
       getCurrentDate()
-      console.log(StartWeekdate)
-      console.log(EndWeekdate)
+      // console.log(StartWeekdate)
+      // console.log(EndWeekdate)
 
 
       const mostViewedPosts =
@@ -289,7 +289,7 @@ const ScheduleList: React.FC<{UID :string}> = (props) => {
           // }
           setShowLoading(false);
           let data1 = snapshotToArray(snapshot) 
-          console.log(data1)
+          // console.log(data1)
           if(data1.length!=0){
             setIsEmpty(false)
           }
@@ -298,7 +298,7 @@ const ScheduleList: React.FC<{UID :string}> = (props) => {
           }
           
           setData(data1)
-          console.log('Data :',data)
+          // console.log('Data :',data)
       });
     }
     useEffect(() => {
@@ -432,6 +432,7 @@ const ScheduleList: React.FC<{UID :string}> = (props) => {
           message={ErrorMessage}
           buttons={['OK']}
         />
+
         </IonList>
     )
 };

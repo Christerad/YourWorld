@@ -61,9 +61,12 @@ import Todolist from './pages/Gamification/TodoPage';
 import Schedule from './pages/Gamification/Schedule';
 import Achievements2 from './pages/Gamification/Achievements2';
 import Gacha from './pages/Gamification/Gacha/Gacha';
-import {calendar, documentText, podium, trophy, globe, leaf } from "ionicons/icons";
 import Prob from './pages/Gamification/Prob';
 import Profile from './pages/Gamification/Profile'
+import Tutorial from './pages/Gamification/Tutorial'
+
+
+import {calendar, documentText, podium, trophy, globe, leaf } from "ionicons/icons";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { isPlatform } from '@ionic/core';
 import { useState } from 'react';
@@ -98,18 +101,18 @@ const App: React.FC = () => {
   const auth = getAuth();
   const db = getDatabase();
   
-  onAuthStateChanged(auth, (user) => {
-      if (user) {
-          const uid = user.uid;
-          const UserPhotoURL=user.photoURL;
-          const username=user.displayName
-          SetUID(uid);
-          getUserData(uid);
-          getUserPhotoURLname(UserPhotoURL,username);
-      } else {
-              history.push('/login');
-      }
-  });
+  // onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //         const uid = user.uid;
+  //         const UserPhotoURL=user.photoURL;
+  //         const username=user.displayName
+  //         SetUID(uid);
+  //         getUserData(uid);
+  //         getUserPhotoURLname(UserPhotoURL,username);
+  //     } else {
+  //       history.push("/Login")
+  //     }
+  // });
 
   if(isPlatform('mobile')){
   return (
@@ -128,6 +131,7 @@ const App: React.FC = () => {
             <Route  path ='/Profile' >
                 <Profile />
             </Route>
+
             
               <IonTabs >
                   <IonRouterOutlet>
@@ -151,6 +155,9 @@ const App: React.FC = () => {
                       </Route>
                       <Route path='/Prob'  >
                         <Prob/>
+                      </Route>
+                      <Route  path ='/Tutorial' >
+                          <Tutorial />
                       </Route>
                   </IonRouterOutlet>
                   <IonTabBar slot="bottom">
@@ -274,6 +281,9 @@ const App: React.FC = () => {
           </Route>
           <Route path='/Prob'  >
             <Prob/>
+          </Route>
+          <Route  path ='/Tutorial' >
+                <Tutorial />
           </Route>
         </IonRouterOutlet>
       </IonReactRouter>

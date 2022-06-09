@@ -11,8 +11,6 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import {arrowBack} from "ionicons/icons";
 
-
-import ProfilePicture from '../../Controller/ProfilePicture'
 import LevelController from '../../Controller/LevelController'
 import ExperienceController from '../../Controller/ExperienceController';
 
@@ -21,7 +19,7 @@ import ExperienceController from '../../Controller/ExperienceController';
  import './OtherWorld.css'
 
 
-const OtherWorld: React.FC<{OtherUID :string,CurrUID:string}> = (props) => {
+const OtherWorld: React.FC<{OtherUID :string,CurrUID:string,CloseModal:Function}> = (props) => {
     // console.log('OtherUID :',props.OtherUID)
     // console.log('CurruID :',props.CurrUID)
 
@@ -142,10 +140,6 @@ const OtherWorld: React.FC<{OtherUID :string,CurrUID:string}> = (props) => {
           });
     }
 
-
-
-    
-
     const GetOtherUserData =() =>{
         //console.log('User :',user)
         getUserData(props.OtherUID);
@@ -180,7 +174,10 @@ return(
             </IonToolbar>
         </IonHeader> */}
         <IonGrid >
-            <IonRow  >
+            <IonRow >
+            <IonCol class="ion-text-center" size='size-xs' >
+                <IonIcon src={arrowBack} size='large' onClick={()=>props.CloseModal(false)} />
+            </IonCol>
                 <IonCol>
                     <IonRow>
                         <IonText>{Username} </IonText>

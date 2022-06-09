@@ -120,7 +120,7 @@ const Gatcha: React.FC= () => {
         if(SummonTicket<5){
             console.log('Summon Ticket Not Enough')       
             SetErrorCode('Not Enough Ticket');
-            SetErrorMessage('You didnt have Any Summon Ticket');
+            SetErrorMessage('You Need 5 Summon ticket for 1 Field Ticket');
             setShowAlert1(true)
         }else{
             console.log('Summon Ticket Enough')

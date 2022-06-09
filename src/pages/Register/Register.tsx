@@ -3,9 +3,9 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonRow, IonCol
 
 import React, { useState } from 'react';
 import { format, parseISO } from 'date-fns';
-import { getAuth, createUserWithEmailAndPassword , updateProfile} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword , updateProfile, onAuthStateChanged} from "firebase/auth";
 import { useHistory } from 'react-router';
-import { getDatabase, ref, set, push, child, update} from "firebase/database";
+import { getDatabase, ref, set, push, child, update, get} from "firebase/database";
 
 import MainIcon from '../../components/Image/Icon.png'
 const Register: React.FC = () => {
@@ -84,7 +84,8 @@ const Register: React.FC = () => {
                     TaskClassDone:0,
                     TaskHomeWorkDone:0,                        
                     SummonPulled:0,
-                    FieldClaimed:0
+                    FieldClaimed:0,
+                    FirstLogin:true
                 });
 
                 const newPostKey = push(child(ref(db), 'World/'+user.uid)).key;
@@ -96,7 +97,9 @@ const Register: React.FC = () => {
                     console.log('World Updated')
                     //return true
                   })
-                
+
+                //   console.log('login success redirect to tutorial')
+                //   history.push("/Tutorial")
                 return true
               })
             .catch((error) => {
@@ -117,13 +120,63 @@ const Register: React.FC = () => {
         console.log(`${res ? 'Register success' : 'Register failed'}`)
         if (res)
         {
-            history.push("/Schedule")
+            // history.push("/Schedule")
+            // console.log('Success')
+            const user = auth.currentUser;            
+            console.log('user : ',user)
+            console.log(res,'res')
+            const dbRef = ref(getDatabase());
+            if(user){
+                get(child(dbRef, 'users/' + user.uid)).then((snapshot) => {
+                    if (snapshot.exists()) {
+                      if(snapshot.val().FirstLogin == true){
+                        console.log("Going to Tutorial")
+                        history.push("/Tutorial")
+                      }else{
+                        console.log("Going to Schedule")
+                        history.push("/Schedule")
+                      }
+                    } else {
+                      console.log("No data available");
+                    }
+                  }).catch((error) => {
+                    console.error(error);
+                  });
+            }
         } 
         else 
         {
             setShowAlert1(true);
         }
     }
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+        //   history.push('/Schedule');
+          const user = auth.currentUser;            
+        //   console.log('user : ',user)
+          const dbRef = ref(getDatabase());
+
+          if(user){
+              get(child(dbRef, 'users/' + user.uid)).then((snapshot) => {
+                  if (snapshot.exists()) {
+                    if(snapshot.val().FirstLogin == true){
+                        console.log("Going to Tutorial")
+                      history.push("/Tutorial")
+                    }else{
+                        console.log("Going to Schedule")
+                      history.push("/Schedule")
+                    }
+                  } else {
+                    console.log("No data available");
+                  }
+                }).catch((error) => {
+                  console.error(error);
+                });
+          }
+        } 
+      });
+
 return (
 <IonPage>
     <IonHeader>

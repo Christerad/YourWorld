@@ -6,7 +6,7 @@ import "./Login.css";
 import { useHistory } from 'react-router';
 import { useState } from 'react';
 import { getAuth, signInWithPopup, GoogleAuthProvider,signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth"
-import { getDatabase, ref, child, get, set } from "firebase/database";
+import { getDatabase, ref, child, get, set, query, orderByChild, equalTo, onValue } from "firebase/database";
 
 import MainIcon from '../../components/Image/Icon.png'
 
@@ -35,9 +35,12 @@ const Login: React.FC = () => {
             .then((snapshot) => {
                 if (snapshot.exists()) {
                 //   console.log(snapshot.val());
+                    console.log('login success redirect to Schedule')
+                    history.push("/Schedule")
                 } else {
                     console.log("No data available");
-                    set(ref(getDatabase(), 'users/' +   userID), {
+
+                        set(ref(getDatabase(), 'users/' +   userID), {
                         username: userName,
                         email: UserEmail,
                         Level: 1,
@@ -51,15 +54,19 @@ const Login: React.FC = () => {
                         SummonTicket :1,
                         FieldTicket :1,
                         SummonPulled:0,
-                        FieldClaimed:0
-                    });
+                        FieldClaimed:0,
+                        FirstLogin:true
+                    })
+
+
+
+                    // console.log('login success redirect to tutorial')
+                    // history.push("/Tutorial")
                 }
             }).catch((error) => {
                 console.error(error);
               })
-            ;
-            console.log('login success')
-            history.push("/Schedule")
+
         }).catch((error) => {
             console.log('login gagal')
             console.log('error :',error)
@@ -75,9 +82,28 @@ const Login: React.FC = () => {
                 SetErrorCode(error.message);
                 SetErrorMessage(error.message);
             });
-            const user = auth.currentUser;            
-            console.log('user : ',user)
-            console.log(res,'res')
+            // const user = auth.currentUser;            
+            // console.log('user : ',user)
+            // console.log(res,'res')
+            // const dbRef = ref(getDatabase());
+
+            // if(user){
+            //     get(child(dbRef, 'users/' + user.uid)).then((snapshot) => {
+            //         if (snapshot.exists()) {
+            //           if(snapshot.val().FirstLogin == true){
+            //             history.push("/Tutorial")
+            //           }else{
+            //             history.push("/Schedule")
+            //           }
+            //         } else {
+            //           console.log("No data available");
+            //         }
+            //       }).catch((error) => {
+            //         console.error(error);
+            //       });
+            // }
+
+
             return res
     }
 
@@ -86,7 +112,8 @@ const Login: React.FC = () => {
          console.log(`${res ? 'login success' : 'login failed'}`)
         if (res)
         {
-            history.push("/Schedule")
+            // history.push("/Schedule")
+            console.log('success')    
         } 
         else 
         (
@@ -94,15 +121,30 @@ const Login: React.FC = () => {
         )
     }
 
-    const db = getDatabase();
-    //console.log('db :',db)
-
     onAuthStateChanged(auth, (user) => {
         if (user) {
-          //console.log('User :',user)
+        //   history.push('/Schedule');
+          const user = auth.currentUser;            
+        //   console.log('user : ',user)
+          const dbRef = ref(getDatabase());
 
-          history.push('/Schedule');
-          
+          if(user){
+              get(child(dbRef, 'users/' + user.uid)).then((snapshot) => {
+                  if (snapshot.exists()) {
+                    if(snapshot.val().FirstLogin == true){
+                        console.log("Going to Tutorial")
+                      history.push("/tutorial")
+                    }else{
+                        console.log("Going to Schedule")
+                      history.push("/Schedule")
+                    }
+                  } else {
+                    console.log("No data available");
+                  }
+                }).catch((error) => {
+                  console.error(error);
+                });
+          }
         } 
       });
 return (
@@ -190,3 +232,7 @@ return (
   };
   
   export default Login;
+
+function dbRef(dbRef: any, arg1: string): import("@firebase/database").Query {
+    throw new Error('Function not implemented.');
+}

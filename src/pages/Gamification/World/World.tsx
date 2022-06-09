@@ -188,6 +188,7 @@ return(
                     <ExperienceController LvL={Level} XP={XP} MaxXP={Level*3} />
                 </IonCol> 
             </IonRow>
+
             <IonRow>
                     <IonCol>
                         <IonItem>
@@ -205,7 +206,11 @@ return(
                         </IonItem>
                     </IonCol>
                 </IonRow>
+                <IonRow>
+                you can add plants on empty field
+            </IonRow>
             <IonRow>
+                
                 <IonCol>
                     <WorldList UID={UID}  />
                 </IonCol>

@@ -57,8 +57,8 @@ const Schedule: React.FC = () => {
         }
     });
 
-    console.log(getPlatforms())
-    console.log('Is Desktop?',isPlatform('desktop'))
+    // console.log(getPlatforms())
+    // console.log('Is Desktop?',isPlatform('desktop'))
     return(
         <IonPage>
             {isPlatform('desktop') && (
@@ -86,11 +86,16 @@ const Schedule: React.FC = () => {
                     <IonRow>
                         This Week Schedule
                     </IonRow>
+    
                     <IonRow>
                         <IonCol>
                             
                         <ScheduleList UID={UID} />
                         </IonCol>   
+                    </IonRow>
+                    <IonRow>
+          
+                    <h6>*Swipe Right of left to decide success or not </h6>
                     </IonRow>
             </IonContent>
         </IonPage>

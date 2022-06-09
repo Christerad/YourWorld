@@ -210,6 +210,9 @@ return(
             </IonCol> 
         </IonRow>
         <IonRow>
+                    <h6>*Swipe Right of left to decide success or not </h6>
+                </IonRow>
+        <IonRow>
             <IonCol>
                 <TodoList2 UID={UID} />
             </IonCol>
@@ -332,6 +335,7 @@ return(
                     message={ErrorMessage}
                     buttons={['OK']}
                 />
+
             </IonContent>
         </IonModal>
     </IonContent>

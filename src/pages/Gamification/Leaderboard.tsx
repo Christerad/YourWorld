@@ -75,7 +75,7 @@ return(
         </IonToolbar>
     )}
     <IonContent>
-        <IonRow  >
+        <IonRow>
             <IonCol class="ion-text-center" size='size-xs'>
                 <ProfilePicture PhotoUrl={ProfilePhotoURL} />
             </IonCol>
@@ -88,6 +88,9 @@ return(
                 </IonRow>
                 <ExperienceController LvL={Level} XP={XP} MaxXP={Level*3} />
             </IonCol> 
+        </IonRow>
+        <IonRow>
+            <h6>*Swipe Right to see other players world </h6>
         </IonRow>
         <IonRow>
             <IonCol>

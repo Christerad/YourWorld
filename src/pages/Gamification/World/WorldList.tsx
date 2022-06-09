@@ -373,7 +373,7 @@ const WorldList: React.FC<{UID :string}> = (props) => {
               </IonItem>
           </IonCol>
         ))}
-                        <IonLoading
+       <IonLoading
         isOpen={showLoading}
         onDidDismiss={() => setShowLoading(false)}
         message={'Loading...'}

@@ -1,7 +1,7 @@
 import { IonContent, IonHeader, IonPage, IonRow, IonCol, IonImg, IonText, IonLabel
     ,IonItem, IonList, IonButton, IonModal, IonLoading, IonItemOptions, IonItemOption, IonItemSliding} from '@ionic/react';
 import { IonIcon } from '@ionic/react';
-import { personCircle,calendar, documentText, podium, trophy, globe } from "ionicons/icons";
+import { personCircle,calendar, documentText, podium, trophy, globe, arrowBack } from "ionicons/icons";
 import React, { useState, useRef, useEffect } from 'react';
 import { format, parseISO } from 'date-fns';
 import { useHistory } from 'react-router';
@@ -10,6 +10,8 @@ import { getDatabase, ref, query, onValue, orderByChild} from "firebase/database
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import OtherWorld from './OthersWorld/OtherWorld';
+import LevelController from '../Controller/LevelController'
+import ExperienceController from '../Controller/ExperienceController';
 
 import './LeaderboardList.css'
 
@@ -22,22 +24,34 @@ const LeaderboardList: React.FC <{UID :string}>= (props) => {
     const [data, setData] = useState<any[]>([])
     const [showLoading, setShowLoading] = useState(true);
     const [OtherUID,SetOtherUID]=useState<string>('')
+    const [UsernameOther, SetUsernameOther] = useState<string | any>()
+    const [LevelOther, SetLevelOther] = useState<Number | any>()
+    const [XPOther, SetXPOther] = useState<Number| any>()
     
     const [showModalWorld, setShowModalWorld] = useState(false);
     const ref2 = useRef<any>(null);
+    
+    const history = useHistory();
 
     async function OpenModal(UID : string){
       console.log('UID SELECTED :',UID)
       setShowModalWorld(true)
       SetOtherUID(UID)
       console.log('Other UID :',OtherUID );
-      // if(querySelector("ion-item-sliding")){
-      //   await document.querySelector("ion-item-sliding").close();
-      // }
   }
 
-  function OpenModal2(slidingId: string){
-    // document.getElementById( slidingId ).close(); 
+  const CloseModal =(data:boolean)=>{
+    console.log('closing modal')
+    setShowModalWorld(data)
+
+}
+
+
+  function OpenModal2(UID: string){
+    console.log('UID SELECTED :',UID)
+    SetOtherUID(UID)
+    console.log('Other UID :',OtherUID );
+
 }
 
     const db = getDatabase();
@@ -130,7 +144,21 @@ const LeaderboardList: React.FC <{UID :string}>= (props) => {
             </IonItemSliding>
           ))}
         <IonModal trigger="trigger-button-World" isOpen={showModalWorld} showBackdrop={true} onDidDismiss={()=>setShowModalWorld(false)} class="modal-wrapper4">
-            <OtherWorld OtherUID={OtherUID} CurrUID={props.UID} ></OtherWorld>
+            <IonRow >
+                <IonCol slot='start'>
+                    <IonIcon src={arrowBack} size='large'  onClick={()=>setShowModalWorld(false)}/>
+                </IonCol>
+                <IonCol>
+                    <IonRow>
+                        <IonText>{UsernameOther} </IonText>
+                    </IonRow>
+                    <IonRow>
+                        <LevelController LvL={LevelOther} />
+                    </IonRow>
+                    <ExperienceController LvL={LevelOther} XP={XPOther} MaxXP={LevelOther*3} />
+                </IonCol> 
+            </IonRow>
+            <OtherWorld OtherUID={OtherUID} CurrUID={props.UID} CloseModal={CloseModal} />
         </IonModal>          
         <IonLoading
             isOpen={showLoading}
